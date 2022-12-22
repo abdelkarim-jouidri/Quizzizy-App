@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Quizizy</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="aws.webp" alt="" >
+                <div>
+                    <h3>QUIZIZY</h3>
+                <h5>AWS TRAINING</h5>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="wrapper">
+                <div class="stepper-container">
+                    <button class="btn" id="btnPrev">&larr;</button>
+
+                    <div class="stepper">
+                        <div class="stepper-progress" id="stepper-progress"></div>
+                        <div class="dot completed" id="dot1">
+                            1
+                        </div>
+                       
+                        <div class="dot" id="dot2">
+                            2
+                        </div>
+                        <div class="dot" id="dot3">
+                            3
+                    </div>
+                    
+                </div>
+                <button class="btn" id="btnNext"> &rarr;</button>
+                </div>
+            </div>
+            <div class="cards">
+                <div class="card">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellat neque, officia, dolorum quisquam qui consectetur, laudantium asperiores placeat ab commodi adipisci veritatis porro dolores distinctio quia vel repudiandae architecto.
+                Reprehenderit, quibusdam harum tempora sequi dolor autem quasi nesciunt neque modi, ex dignissimos dicta expedita est ratione beatae, architecto vel. Animi, temporibus? Rerum at laudantium veniam esse ipsam officiis soluta.
+                </div>
+                <div class="card">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellat neque, officia, dolorum quisquam qui consectetur, laudantium asperiores placeat ab commodi adipisci veritatis porro dolores distinctio quia vel repudiandae architecto.
+                    Reprehenderit, quibusdam harum tempora sequi dolor autem quasi nesciunt neque modi, ex dignissimos dicta expedita est ratione beatae, architecto vel. Animi, temporibus? Rerum at laudantium veniam esse ipsam officiis soluta.
+                    </div>
+                <div class="card">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellat neque, officia, dolorum quisquam qui consectetur, laudantium asperiores placeat ab commodi adipisci veritatis porro dolores distinctio quia vel repudiandae architecto.
+                    Reprehenderit, quibusdam harum tempora sequi dolor autem quasi nesciunt neque modi, ex dignissimos dicta expedita est ratione beatae, architecto vel. Animi, temporibus? Rerum at laudantium veniam esse ipsam officiis soluta.
+                </div>
+                
+            </div>
+        </main>
+        <footer>
+    
+        </footer>
+    </div>
+</body>
+<script>
+    let btnNext = document.getElementById('btnNext')
+    let btnPrev = document.getElementById('btnPrev')
+    let counter = 0;
+    let width = 0;
+    let stepProgress = document.getElementById('stepper-progress');
+    console.log(stepProgress.classList)
+    btnNext.addEventListener('click',()=>{
+        if(counter<100){
+            counter+=50;
+        document.getElementById('stepper-progress').style.width = `${counter}%`
+        }
+        
+    })
+
+    btnPrev.addEventListener('click',()=>{
+        if(counter>0){
+            counter-=50;
+        document.getElementById('stepper-progress').style.width = `${counter}%`
+        }
+    })
+</script>
+</html>
+
+
+
+

@@ -1,0 +1,137 @@
+body {
+  background-color: #eeeeee;
+  height: 100%;
+}
+
+header {
+  box-shadow: 0px 1px 0px rgb(16, 16, 16);
+  margin-bottom: 10px;
+}
+header .logo {
+  background-color: #ffdf59;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .logo h3, header .logo h5 {
+  text-align: center;
+  margin: 0;
+}
+header .logo img {
+  width: 100px;
+}
+header .logo h5 {
+  font-weight: normal;
+}
+
+main .wrapper {
+  padding: 10px 10px;
+  padding-bottom: 30px;
+  border: 1px #000000 solid;
+  border-radius: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main .wrapper .stepper {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+main .wrapper .stepper .dot {
+  height: 50px;
+  width: 50px;
+  background-color: #ffdf59;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+main .wrapper .stepper #dot1::after {
+  content: "INFROMATION";
+  width: 100%;
+  position: absolute;
+  top: 120%;
+  left: -15%;
+  display: block;
+  font-weight: normal;
+  font-size: small;
+}
+main .wrapper .stepper #dot2::after {
+  content: "QUESTIONS";
+  width: 100%;
+  position: absolute;
+  top: 120%;
+  left: -15%;
+  display: block;
+  font-weight: normal;
+  font-size: small;
+}
+main .wrapper .stepper #dot3::after {
+  content: "RESULTS";
+  width: 100%;
+  position: absolute;
+  top: 120%;
+  left: -15%;
+  display: block;
+  font-weight: normal;
+  font-size: small;
+}
+main .wrapper .stepper::after {
+  content: "";
+  height: 6px;
+  background-color: #ccc9c9;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+main .wrapper .stepper .stepper-progress {
+  transition: ease-in 1s;
+  height: 6px;
+  background-color: #0b0a0a;
+  width: 0;
+  position: absolute;
+}
+main .cards {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+main .cards .card {
+  background-color: #ccc9c9;
+  border: #000000 1px solid;
+  width: 40%;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.btn-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #ffdf59;
+  border: #000000;
+  font-weight: bold;
+  border-style: solid;
+  color: #000000;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: x-large;
+  line-height: 5px;
+}
+
+.stepper-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

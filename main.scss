@@ -1,0 +1,159 @@
+$photo-header-width : 1200px;
+$bg-color :#eeeeee;
+$primary-color : #ffdf59;
+$logo-width: 100px;
+$stepper-width : 1500px;
+$dots-width : 50px;
+$dots-list:(1,2,3);
+@mixin display-flex($position:center) {
+    display: flex;
+    // align-items: center;
+    justify-content: $position;
+}
+
+@mixin generate-dot-text($number , $text){
+    #dot#{$number}::after{
+        content: '#{$text}';
+        width: 100%;
+        position: absolute;
+        top: 120%;
+        left: -15%;
+        display: block;
+        font-weight: normal;
+        font-size: small;
+    }
+}
+
+
+
+
+body{
+    background-color: $bg-color;
+    height: 100%;
+}
+
+header {
+    .logo{
+        background-color: $primary-color;
+        @include display-flex;
+        align-items: center;
+        h3,h5{
+            text-align: center;
+            margin: 0;
+        }
+        img{
+            width: $logo-width;
+
+        }
+        
+        h5{
+            font-weight: normal;
+        }
+    }
+    
+    box-shadow: 0px 1px 0px  rgb(16, 16, 16);
+    margin-bottom: 10px;
+}
+
+main{
+    .wrapper{
+        padding:  10px 10px;
+        padding-bottom: 30px;
+        border: 1px #000000 solid;
+        border-radius: 10px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .stepper{
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+
+            .dot{
+                height: $dots-width;
+                width: $dots-width;
+                background-color: #ffdf59;
+                border-radius: 50%;
+                @include display-flex(center);
+                align-items : center;
+                position: relative;
+
+            }
+            @include generate-dot-text(1,'INFROMATION' );
+            @include generate-dot-text(2,'QUESTIONS' );
+            @include generate-dot-text(3,'RESULTS' );
+
+            &::after{
+                content: '';
+                height: 6px;
+                background-color: #ccc9c9;
+                width: 100%;
+                position: absolute;
+                z-index: -1;
+            }
+            .stepper-progress{
+                transition: ease-in 1s;
+                height: 6px;
+                background-color: #0b0a0a;
+                width: 0;
+                position: absolute;
+            }
+
+        }
+        
+    }
+
+    .cards{
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        .card{
+            background-color: #ccc9c9;
+            border: #000000 1px solid;
+            width: 40%;
+            max-width: 300px;
+            margin-top: 10px;
+        }
+    }
+    
+    }
+
+.btn-container{
+    margin-top: 40px;
+    @include display-flex(center);
+    
+}
+
+.btn{
+    background-color:#ffdf59;
+    // padding: 10px;
+    border: #000000;
+    font-weight: bold;
+    border-style: solid;
+    color: #000000;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+   border-radius: 50%;
+    font-weight: bold;
+    font-size: x-large;
+    line-height: 5px;
+   
+    
+}
+
+.stepper-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+
+
+
+
