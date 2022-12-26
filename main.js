@@ -61,5 +61,32 @@ let Questions = [
         D:"Enable AWS CloudTrail.",
         Answer : "C",
         Explanation : "Multi-Factor authentication (MFA) is a simple best practice that adds an extra layer of protection on top of a username and password. With MFA enabled, when a user signs in to an AWS Management Console, they will be prompted for their username and password (the first factor -- what they have). Taken together, these multiple factors provide increased security for AWS account settings and resources."
+    },
+    {
+        question:"Which service can identify the user that made the API call when an Amazon EC2 instance is terminated?",
+        A:"AWS Trusted Advisor.",
+        B:"AWS CloudTrail.",
+        C:"AWS X-Ray.",
+        D:"AWS Identify and Acess Management (AWS IAM).",
+        Answer : "B",
+        Explanation : "AWS CloudTrail helps users enable governance, compliance, and operational and risk auditing of their AWS accounts. Actions taken by a user, role, or an AWS service are recorded as events in CloudTrail. Events include actions taken in the AWS Management Console, AWS Command Line Interface (CLI), and AWS SDKs and APIs."
+    },
+    {
+        question:"Which service would be used to send alerts based on Amazon CloudWatch alarms?",
+        A:"Amazon Simple Notification Service (Amazon SNS).",
+        B:"AWS CloudTrail.",
+        C:"AWS Trusted Advisor.",
+        D:"Amazon Route 53.",
+        Answer : "A",
+        Explanation : "Amazon SNS and Amazon CloudWatch are integrated so users can collect, view, and analyze metrics for every active SNS. Once users have configured CloudWatch for Amazon SNS, they can gain better insight into the performance of their Amazon SNS topics, push notifications, and SMS deliveries."
+    },
+    {
+        question:"Where can a user find information about prohibited actions on the AWS infrastructure?",
+        A:"AWS Trusted Advisor.",
+        B:"AWS Identity and Access Management (IAM).",
+        C:"AWS Billing Console.",
+        D:"AWS Acceptable Use Policy.",
+        Answer : "D",
+        Explanation : "The AWS Acceptable Use Policy provides information regarding prohibited actions on the AWS infrastructure."
     }
 ]
