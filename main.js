@@ -179,8 +179,10 @@
             if(QuestionsCopy.length===0){
                 setTimeout(()=>{
                     scoreText.innerText=`your score is : ${score}/10`;
-                    printCorrectAnswers()
-                    printWrongAnswers()
+                    // printCorrectAnswers()
+                    // printWrongAnswers()
+                    printAnswers(correctAnswers)
+                    printAnswers(wrongAnswers)
                     GoToPage(3);
                 },500)
                 
@@ -260,13 +262,15 @@
             document.querySelector('#progress-text').innerText = `Your progress : ${progressRatio}%`
         }
     
-        function printCorrectAnswers(){
+        function printAnswers(answersArray){
             console.log(`correct answers from print correct answers: `,correctAnswers)
             let markup = ''
             correctAnswers.forEach(answer => {
-                markup += `<div class='correct-answer'>
+                console.log(answer)
+                markup += `<div class=${answersArray == correctAnswers ? 'correct-answer' : 'wrong-answer'}>
                     <li><span class="first-word">Question</span> : ${answer.question}</li>
                     <hr>
+                    <li><span class="first-word">Selected Answer</span> : ${answer.selectedAnswer}</li>
                     <li><span class="first-word">Answer</span> : ${answer[answer.Answer]}</li>
                     <li><span class="first-word">Explanation</span> : ${answer.Explanation}</li>
                 </div>`
@@ -282,6 +286,7 @@
                 markup += `<div class='wrong-answer'>
                     <li><span class="first-word">Question</span> : ${answer.question}</li>
                     <hr>
+                    <li><span class="first-word">Selected Answer</span> : ${answer.selectedAnswer}</li>
                     <li><span class="first-word">Answer</span> : ${answer[answer.Answer]}</li>
                     <li><span class="first-word">Explanation</span> : ${answer.Explanation}</li>
                 </div>`
