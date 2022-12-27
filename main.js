@@ -111,126 +111,121 @@
         let correctAnswers = []
         let questionsBtns = Array.from(document.getElementsByClassName('card'))
     
-        console.log(questionsBtns)
     
+    
+    
+    function GoToPage(pageNumber){
+        if(pageNumber===1){
+        counter = 0
+        document.getElementById('stepper-progress').style.width = `${counter}%`
         
-    
+        questionsContainer.classList.add('hidden')
+        informationContainer.classList.remove('hidden')
+        resultsContainer.classList.add('hidden')
+        document.getElementById('dot2').classList.add('pending')
+        document.getElementById('dot3').classList.add('pending')
+        document.getElementById('dot2').classList.remove('active')
+        document.getElementById('dot3').classList.remove('active')
+
+        }
+        if(pageNumber===2){
+        counter = 50
+        document.getElementById('stepper-progress').style.width = `${counter}%`
         
-    
-      
-    
-        function GoToPage(pageNumber){
-            if(pageNumber===1){
-            counter = 0
+        questionsContainer.classList.remove('hidden')
+        informationContainer.classList.add('hidden')
+        document.getElementById('dot2').classList.add('active')
+        document.getElementById('dot2').classList.remove('pending')
+        document.getElementById('dot3').classList.remove('active')
+        document.getElementById('dot3').classList.add('pending')
+        // alert('moved to page 2  ')
+
+        }
+        if(pageNumber===3){
+            counter=100
             document.getElementById('stepper-progress').style.width = `${counter}%`
-            
             questionsContainer.classList.add('hidden')
-            informationContainer.classList.remove('hidden')
-            resultsContainer.classList.add('hidden')
-            document.getElementById('dot2').classList.add('pending')
-            document.getElementById('dot3').classList.add('pending')
-            document.getElementById('dot2').classList.remove('active')
-            document.getElementById('dot3').classList.remove('active')
-    
-            }
-            if(pageNumber===2){
-            counter = 50
-            document.getElementById('stepper-progress').style.width = `${counter}%`
-            
-            questionsContainer.classList.remove('hidden')
             informationContainer.classList.add('hidden')
-            document.getElementById('dot2').classList.add('active')
-            document.getElementById('dot2').classList.remove('pending')
-            document.getElementById('dot3').classList.remove('active')
-            document.getElementById('dot3').classList.add('pending')
-            // alert('moved to page 2  ')
-    
-            }
-            if(pageNumber===3){
-                counter=100
-                document.getElementById('stepper-progress').style.width = `${counter}%`
-                questionsContainer.classList.add('hidden')
-                informationContainer.classList.add('hidden')
-                resultsContainer.classList.remove('hidden')
-                document.getElementById('dot3').classList.add('active')
-                document.getElementById('dot3').classList.remove('pending')
-            }
-    
+            resultsContainer.classList.remove('hidden')
+            document.getElementById('dot3').classList.add('active')
+            document.getElementById('dot3').classList.remove('pending')
         }
+
+    }
     
-        function restartQuizz(){
-            resetParameters()
-            increaseProgress(0)
-            resultsContainer.classList.add('hidden')
-            
-            startQuizz()
-            // startQuizz()
-        }
+    function restartQuizz(){
+        resetParameters()
+        increaseProgress(0)
+        resultsContainer.classList.add('hidden')
+        
+        startQuizz()
+    }
     
-        function startQuizz(){
-            QuestionsCopy=[...Questions]
-            generateNextQuestion()
-            GoToPage(2)
-        }
+    function startQuizz(){
+        QuestionsCopy=[...Questions]
+        generateNextQuestion()
+        GoToPage(2)
+    }
     
-        function generateNextQuestion(){
-            increaseProgress(quizzProgress)
-            quizzProgress++
-            if(QuestionsCopy.length===0){
-                setTimeout(()=>{
-                    scoreText.innerText=`your score is : ${score}/10`;
-                    printAnswers(correctAnswers)
-                    printAnswers(wrongAnswers)
-                    GoToPage(3);
-                },500)
-                
-                return;
-            }
+    function generateNextQuestion(){
+        increaseProgress(quizzProgress)
+        quizzProgress++
+        if(QuestionsCopy.length===0){
+            setTimeout(()=>{
+                scoreText.innerText=`your score is : ${score}/10`;
+                printAnswers(correctAnswers)
+                printAnswers(wrongAnswers)
+                GoToPage(3);
+            },500)
             
-            currentRandomQuestion = generateRandomQuestion()
-            
-            if(counter!=0) setTimeout(()=>renderQuestion(currentRandomQuestion), 500)
-            else renderQuestion(currentRandomQuestion)
-            console.log('question number : ' + quizzProgress , currentRandomQuestion)
-        }
-    
-        function generateRandomQuestion(){
-            const randomIndex = Math.floor(Math.random()*QuestionsCopy.length)
-            randomQuestion = QuestionsCopy[randomIndex];
-            QuestionsCopy.splice(randomIndex,1)
-            return randomQuestion
-        }
-    
-        function renderQuestion(randomQuestion){
-            let questionHeading = document.getElementById('question-heading');
-            
-            questionHeading.innerHTML = randomQuestion.question
-            questionsBtns.forEach(btn=>{
-                const answer = btn.dataset.answer
-                btn.innerText = randomQuestion[answer]
-            })
-            
-    
-            
+            return;
         }
         
-        questionsBtns.forEach(btn=>{
-            btn.addEventListener('click',(e)=>{
-                const selectedAnswer = e.target.innerText;
-                if(e.target.dataset.answer == currentRandomQuestion.Answer) {
-                    correctAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
-                    colorAnswer(e.target,'correct')
-                    score++;
-                    console.log('score: ', score)
-                }
-                else {
-                    wrongAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
-                    colorAnswer(e.target,'incorrect')
-                }
-                generateNextQuestion()
+        currentRandomQuestion = generateRandomQuestion()
+        
+        if(counter!=0) setTimeout(()=>renderQuestion(currentRandomQuestion), 500)
+        else renderQuestion(currentRandomQuestion)
+    }
     
-            })
+
+    function generateRandomQuestion(){
+        const randomIndex = Math.floor(Math.random()*QuestionsCopy.length)
+        randomQuestion = QuestionsCopy[randomIndex];
+        QuestionsCopy.splice(randomIndex,1)
+        return randomQuestion
+    }
+
+    //render the data of each question on the UI
+    function renderQuestion(randomQuestion){
+        let questionHeading = document.getElementById('question-heading');
+        
+        questionHeading.innerHTML = randomQuestion.question
+        questionsBtns.forEach(btn=>{
+            const answer = btn.dataset.answer
+            btn.innerText = randomQuestion[answer]
         })
+        
+
+        
+    }
+    
+    //attach an onclick event listener to each button containing the choices for the questions
+    questionsBtns.forEach(btn=>{
+        btn.addEventListener('click',(e)=>{
+            const selectedAnswer = e.target.innerText;
+            if(e.target.dataset.answer == currentRandomQuestion.Answer) {
+                correctAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
+                colorAnswer(e.target,'correct')
+                score++;
+            }
+            else {
+                wrongAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
+                colorAnswer(e.target,'incorrect')
+            }
+            generateNextQuestion()
+
+        })
+    })
     
     
         function colorAnswer(answer,type){
@@ -243,10 +238,7 @@
             },500)
         }
       
-    
-       
-        
-    
+
         function increaseProgress(progress){
             let progressRatio = (progress/Questions.length)*100;
             document.querySelector('.progress-bar-inner').style.width = `${progressRatio}%`
@@ -279,7 +271,6 @@
             wrongAnswers = []
             document.querySelector('.correct-answers-container').innerHTML = ''
             document.querySelector('#progress-text').innerText = '';
-    
-            
+     
         }
     
