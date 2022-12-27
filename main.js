@@ -179,8 +179,6 @@
             if(QuestionsCopy.length===0){
                 setTimeout(()=>{
                     scoreText.innerText=`your score is : ${score}/10`;
-                    // printCorrectAnswers()
-                    // printWrongAnswers()
                     printAnswers(correctAnswers)
                     printAnswers(wrongAnswers)
                     GoToPage(3);
@@ -218,19 +216,16 @@
         
         questionsBtns.forEach(btn=>{
             btn.addEventListener('click',(e)=>{
-                console.log(e.target.dataset.answer , currentRandomQuestion.Answer)
                 const selectedAnswer = e.target.innerText;
                 if(e.target.dataset.answer == currentRandomQuestion.Answer) {
-                    console.log(selectedAnswer)
                     correctAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
-
-                    answerIsCorrect(e.target)
+                    colorAnswer(e.target,'correct')
                     score++;
                     console.log('score: ', score)
                 }
                 else {
                     wrongAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
-                    answerIsInCorrect(e.target)
+                    colorAnswer(e.target,'incorrect')
                 }
                 generateNextQuestion()
     
@@ -238,20 +233,16 @@
         })
     
     
-        function answerIsCorrect(answer){
-            answer.classList.add('answer-correct')
+        function colorAnswer(answer,type){
+            const className = type=='correct'? 'answer-correct' : 'answer-incorrect';
+            console.log('className :',className)
+            answer.classList.add(className)
             setTimeout(()=>{
-            answer.classList.remove('answer-correct')
+            answer.classList.remove(className)
     
             },500)
         }
-        function answerIsInCorrect(answer){
-            answer.classList.add('answer-incorrect')
-            setTimeout(()=>{
-            answer.classList.remove('answer-incorrect')
-    
-            },500)
-        }
+      
     
        
         
@@ -263,7 +254,7 @@
         }
     
         function printAnswers(answersArray){
-            console.log(`correct answers from print correct answers: `,correctAnswers)
+            //rendering function for the results page
             let markup = ''
             correctAnswers.forEach(answer => {
                 console.log(answer)
@@ -278,22 +269,9 @@
             })
             document.querySelector('.correct-answers-container').insertAdjacentHTML('beforeend',markup)
         }
-        function printWrongAnswers(){
-            console.log(`wrong answers from print wrong answers: `,wrongAnswers)
-    
-            let markup = ''
-            wrongAnswers.forEach(answer => {
-                markup += `<div class='wrong-answer'>
-                    <li><span class="first-word">Question</span> : ${answer.question}</li>
-                    <hr>
-                    <li><span class="first-word">Selected Answer</span> : ${answer.selectedAnswer}</li>
-                    <li><span class="first-word">Answer</span> : ${answer[answer.Answer]}</li>
-                    <li><span class="first-word">Explanation</span> : ${answer.Explanation}</li>
-                </div>`
-            })
-            document.querySelector('.correct-answers-container').insertAdjacentHTML('beforeend',markup)
-        }
+       
         function resetParameters(){
+            //reinitialize the state of the application
             score = 0
             counter = 0;
             quizzProgress = 0
