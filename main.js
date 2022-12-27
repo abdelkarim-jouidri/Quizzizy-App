@@ -217,19 +217,17 @@
         questionsBtns.forEach(btn=>{
             btn.addEventListener('click',(e)=>{
                 console.log(e.target.dataset.answer , currentRandomQuestion.Answer)
+                const selectedAnswer = e.target.innerText;
                 if(e.target.dataset.answer == currentRandomQuestion.Answer) {
-                    correctAnswers.push(currentRandomQuestion)
-                    console.log(`correct answers from renderQuestion function: `,correctAnswers)
-                    // correctAnswer(e.target)
+                    console.log(selectedAnswer)
+                    correctAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
+
                     answerIsCorrect(e.target)
                     score++;
                     console.log('score: ', score)
                 }
                 else {
-                    wrongAnswers.push(currentRandomQuestion)
-                    console.log(`wrong answers from renderQuestion function: `,wrongAnswers)
-    
-                    // wrongAnswer(e.target)
+                    wrongAnswers.push({...currentRandomQuestion,'selectedAnswer':selectedAnswer})
                     answerIsInCorrect(e.target)
                 }
                 generateNextQuestion()
@@ -238,39 +236,23 @@
         })
     
     
-        function answerIsCorrect(element){
-            element.classList.add('answer-correct')
+        function answerIsCorrect(answer){
+            answer.classList.add('answer-correct')
             setTimeout(()=>{
-            element.classList.remove('answer-correct')
+            answer.classList.remove('answer-correct')
     
             },500)
         }
-        function answerIsInCorrect(element){
-            element.classList.add('answer-incorrect')
+        function answerIsInCorrect(answer){
+            answer.classList.add('answer-incorrect')
             setTimeout(()=>{
-            element.classList.remove('answer-incorrect')
+            answer.classList.remove('answer-incorrect')
     
             },500)
         }
     
-        function correctAnswer(selectedAnswer){
-            console.log('executed correct answer function')
-            selectedAnswer.style.backgroundColor = 'green'
-            setTimeout(()=>{
-                selectedAnswer.style.backgroundColor = '#aaa9a4'
-            },500)
-    
-        }
-        function wrongAnswer(selectedAnswer){
-            console.log('executed wrong answer function')
-    
-            selectedAnswer.style.backgroundColor = 'red'
-            
-            
-            setTimeout(()=>{
-                selectedAnswer.style.backgroundColor = '#aaa9a4'
-            },500)
-        }
+       
+        
     
         function increaseProgress(progress){
             let progressRatio = (progress/Questions.length)*100;

@@ -1,13 +1,14 @@
 $photo-header-width : 1200px;
 $bg-color :#eeeeee;
 $primary-color : #ffdf59;
+$incorrect-answer-color : #ee2626;
+$correct-answer-color : #158a08;
 $logo-width: 100px;
 $stepper-width : 1500px;
 $dots-width : 50px;
 $dots-list:(1,2,3);
 @mixin display-flex($position:center) {
     display: flex;
-    // align-items: center;
     justify-content: $position;
 }
 
@@ -24,6 +25,17 @@ $dots-list:(1,2,3);
     }
 }
 
+@mixin resultsContainer($color){
+        margin-top: 10px;
+        border: #0b0a0a solid 2px;
+        color: #0b0a0a;
+        padding: 10px 30px;
+        border-left: 10px solid #{$color};
+        font-size: .7em;
+        font-weight: normal;
+        background-color: #fff;
+        border-radius: 10px;
+}
 
 
 
@@ -119,8 +131,6 @@ main{
             background-color: #aaa9a4;
             color: #eeeeee;
             border: #000000 1px solid;
-            // width: 40%;
-            // max-width: 300px;
             cursor: pointer;
             font-size: large;
             margin-top: 10px;
@@ -142,23 +152,7 @@ main{
     
 }
 
-.btn{
-    background-color:#ffdf59;
-    // padding: 10px;
-    border: #000000;
-    font-weight: bold;
-    border-style: solid;
-    color: #000000;
-    cursor: pointer;
-    height: 40px;
-    width: 40px;
-   border-radius: 50%;
-    font-weight: bold;
-    font-size: x-large;
-    line-height: 5px;
-   
-    
-}
+
 
 .stepper-container{
     display: flex;
@@ -265,31 +259,14 @@ main{
     justify-content: center;
     gap: 10px;
     .correct-answer{
-        margin-top: 10px;
-        border: #0b0a0a solid 2px;
-        color: #0b0a0a;
-        padding: 10px 30px;
-        border-left: 10px solid green;
-        font-size: .7em;
-        font-weight: normal;
-        background-color: #fff;
-        border-radius: 10px;
+        @include resultsContainer($correct-answer-color);
         &:first-child{
             margin: 0;
         }
         
     }
     .wrong-answer{
-        margin-top: 10px;
-        border: #0b0a0a solid 2px;
-        color: #0b0a0a;
-        padding: 10px 30px;
-        border-left: 10px solid rgb(189, 8, 8);
-        font-size: .7em;
-        font-weight: normal;
-        background-color: #fff;
-        border-radius: 10px;
-        
+        @include resultsContainer($incorrect-answer-color)
     }
 
     li{
@@ -302,8 +279,9 @@ main{
 }
 
 .answer-incorrect{
-    background: #b00808 !important;
+    background: $incorrect-answer-color !important;
 }
 .answer-correct{
-    background: #0e6905 !important;
+    background: $correct-answer-color !important;
 }
+
